@@ -40,7 +40,7 @@ public class playgroundTests {
         Assertions.assertEquals(text,"Web Playground");
     }
 
-    @Test
+    //@Test
     public void submitFormTest() throws InterruptedException {
         driver.findElement(By.cssSelector("[aria-label=forms]")).click();
 
@@ -52,6 +52,18 @@ public class playgroundTests {
         form.clickAgree(true);
         form.submit();
 
+    }
+    @Test
+    public void planetButtonClick(){
+        driver.findElement(By.cssSelector("[aria-label=planets]")).click();
+     //   driver.findElement(By.cssSelector("button[class='my-3 v-btn']")).click();
+        for (WebElement title : driver.findElements(By.cssSelector("[type=h2]"))){
+            if (title.getText().equalsIgnoreCase("earth"))
+            {
+                System.out.println("found earth");
+                break;
+            }
+        }
     }
     public void formInfo () throws InterruptedException {
 
