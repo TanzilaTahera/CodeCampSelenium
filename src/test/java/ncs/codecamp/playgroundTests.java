@@ -2,6 +2,8 @@ package ncs.codecamp;
 
 import io.restassured.internal.common.assertion.Assertion;
 import ncs.codecamp.models.Form;
+import ncs.codecamp.models.Planet;
+import ncs.codecamp.models.PlanetPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -54,15 +56,22 @@ public class playgroundTests {
 
     }
     @Test
+    public void explorePlanets(){
+        driver.findElement(By.cssSelector("[aria-label=planets]")).click();
+        PlanetPage planetPage = new PlanetPage(driver);
+
+        planetPage.getPlanet("earth").clickExplore();
+
+    }
+    //@Test
     public void planetButtonClick(){
         driver.findElement(By.cssSelector("[aria-label=planets]")).click();
-     //   driver.findElement(By.cssSelector("button[class='my-3 v-btn']")).click();
-        for (WebElement title : driver.findElements(By.cssSelector("[type=h2]"))){
-            if (title.getText().equalsIgnoreCase("earth"))
-            {
-                System.out.println("found earth");
-                break;
-            }
+
+        for (WebElement planetDiv : driver.findElements(By.cssSelector(".planet"))){
+           Planet planetCard = new Planet(planetDiv);
+           if (planetCard.getPlanetName().equalsIgnoreCase("earth")){
+               planetCard.clickExplore();
+           }
         }
     }
     public void formInfo () throws InterruptedException {
